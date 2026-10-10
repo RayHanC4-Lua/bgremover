@@ -157,3 +157,18 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   });
 }
+
+window.addEventListener('paste', (e) => {
+  const items = e.clipboardData && e.clipboardData.items;
+  if (!items) return;
+  for (const it of items) {
+    if (it.type.startsWith('image/')) {
+      handleFile(it.getAsFile());
+      break;
+    }
+  }
+});
+
+['dragover', 'drop'].forEach((t) => {
+  window.addEventListener(t, (e) => e.preventDefault());
+});

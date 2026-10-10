@@ -1,0 +1,11 @@
+{
+  "name": "bgremover",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Penghapus latar gambar gratis yang berjalan di browser",
+  "scripts": {
+    "dev": "python -m http.server 8080 -d public",
+    "deploy": "npx wrangler deploy"
+  },
+  "license": "MIT"
+}
