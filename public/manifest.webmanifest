@@ -1,9 +1,9 @@
 {
   "id": "./",
-  "name": "Penghapus Latar Gambar",
-  "short_name": "Penghapus Latar",
-  "description": "Hapus latar gambar gratis langsung di browser",
-  "lang": "id",
+  "name": "Remove Image Background",
+  "short_name": "BG Remover",
+  "description": "Remove image backgrounds for free, right in your browser",
+  "lang": "en",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

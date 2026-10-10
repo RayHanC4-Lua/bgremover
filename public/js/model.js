@@ -1,35 +1,42 @@
 const CACHE_NAME = 'bgr-model-v1';
+let cacheHits = 0;
 
 export async function loadModel(url, onProgress) {
-  let cache = null;
+  var cache = null;
   try {
     cache = await caches.open(CACHE_NAME);
-    const hit = await cache.match(url);
-    if (hit) return await hit.arrayBuffer();
+    var hit = await cache.match(url);
+    if (hit) {
+      cacheHits = cacheHits + 1;
+      console.log('model from cache', cacheHits);
+      return await hit.arrayBuffer();
+    }
   } catch (e) {
     cache = null;
   }
 
-  const res = await fetch(url);
-  if (!res.ok) throw new Error('Model gagal diunduh');
-  const total = Number(res.headers.get('content-length')) || 0;
-  const reader = res.body.getReader();
-  const chunks = [];
-  let got = 0;
+  console.log('downloding model');
+  var res = await fetch(url);
+  if (!res.ok) throw new Error('Model failed to download');
+  var total = Number(res.headers.get('content-length')) || 0;
+  var reader = res.body.getReader();
+  var chunks = [];
+  var got = 0;
+  var doneFlag = false;
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    chunks.push(value);
-    got += value.length;
+  while (!doneFlag) {
+    var r = await reader.read();
+    if (r.done) { doneFlag = true; break; }
+    chunks.push(r.value);
+    got += r.value.length;
     if (onProgress && total) onProgress(got / total);
   }
 
-  const bytes = new Uint8Array(got);
-  let offset = 0;
-  for (const c of chunks) {
-    bytes.set(c, offset);
-    offset += c.length;
+  var bytes = new Uint8Array(got);
+  var offset = 0;
+  for (var i = 0; i < chunks.length; i++) {
+    bytes.set(chunks[i], offset);
+    offset += chunks[i].length;
   }
 
   try {

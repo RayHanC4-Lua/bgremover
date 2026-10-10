@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Penghapus Latar Gambar Gratis | Hapus Background Foto Online</title>
-<meta name="description" content="Hapus latar belakang gambar secara gratis langsung di browser. Tanpa daftar, tanpa unggah ke server, hasil PNG transparan.">
+<title>Remove Image Background 100% Automatically and Free</title>
+<meta name="description" content="Remove the background from any image for free, right in your browser. No sign-up, no upload to a server, transparent PNG in seconds.">
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/icons/icon-192.png">
@@ -17,43 +17,48 @@
 <div class="wrap topbar-in">
 <a class="brand" href="./">
 <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><circle cx="16" cy="13" r="5"/><path d="M7 26c0-5 4-8 9-8s9 3 9 8z"/></svg>
-<span>Penghapus Latar</span>
+<span>BG Remover</span>
 </a>
 <nav class="nav">
-<a href="#cara-kerja">Cara kerja</a>
-<a href="#fitur">Fitur</a>
+<a href="#how">How it works</a>
+<a href="#features">Features</a>
 <a href="#faq">FAQ</a>
 <a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub</a>
 </nav>
 <div class="tools">
-<button id="themeToggle" class="icon-btn" type="button" aria-label="Ganti tema">
+<button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme">
 <svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
 <svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
 </button>
-<a class="btn small" href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Dukung</a>
+<a class="btn small" href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Support</a>
 </div>
 </div>
 </header>
 <main>
-<section class="hero">
+<section id="top" class="hero">
 <div class="wrap hero-in">
 <div class="hero-copy">
-<h1>Hapus Latar Gambar<br><span>Otomatis dan Gratis</span></h1>
-<p>Unggah foto dan latarnya hilang dalam hitungan detik. Diproses langsung di perangkat Anda, tanpa daftar dan tanpa unggah ke server.</p>
+<h1>Remove Image Background<br><span>100% Automatically and Free</span></h1>
+<p>Upload a photo and the background disappears in seconds. Everything runs on your device, with no sign-up and no upload to a server.</p>
 <ul class="badges">
-<li>Gratis</li>
-<li>Tanpa daftar</li>
-<li>Privat di perangkat</li>
+<li>Free</li>
+<li>No sign-up</li>
+<li>Private on your device</li>
 </ul>
 </div>
 <div class="card">
 <label id="drop" class="drop">
 <input id="file" type="file" accept="image/*" hidden>
 <svg class="up" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
-<span class="btn big">Unggah Gambar</span>
-<span class="hint">atau seret dan lepas gambar ke sini</span>
-<span class="hint">Bisa juga tempel gambar dari clipboard</span>
+<span class="btn big">Upload Image</span>
+<span class="hint">or drag and drop an image here</span>
+<span class="hint">You can also paste an image from your clipboard</span>
 </label>
+<div id="samples" class="samples" hidden>
+<span class="hint">No image? Try one of these:</span>
+<div id="thumbs" class="thumbs"></div>
+</div>
+<p class="legal">Your images are processed in your browser and are never uploaded to a server.</p>
 <div id="status" class="status" hidden>
 <div id="statusText"></div>
 <div id="bar" class="bar"><div id="barFill"></div></div>
@@ -61,89 +66,153 @@
 <section id="result" hidden>
 <div class="stage"><canvas id="out"></canvas></div>
 <div id="swatches" class="swatches">
-<span class="label">Latar</span>
-<button type="button" data-bg="transparent" class="active" aria-label="Transparan"></button>
-<button type="button" data-bg="#ffffff" style="background:#ffffff" aria-label="Putih"></button>
-<button type="button" data-bg="#000000" style="background:#000000" aria-label="Hitam"></button>
-<input id="custom" type="color" value="#4f8cff" aria-label="Warna lain">
+<span class="label">Background</span>
+<button type="button" data-bg="transparent" class="active" aria-label="Transparent"></button>
+<button type="button" data-bg="#ffffff" style="background:#ffffff" aria-label="White"></button>
+<button type="button" data-bg="#000000" style="background:#000000" aria-label="Black"></button>
+<input id="custom" type="color" value="#4f8cff" aria-label="Custom color">
 </div>
 <div class="actions">
-<button id="download" type="button" class="btn">Unduh PNG</button>
-<button id="reset" type="button" class="btn ghost">Gambar baru</button>
+<button id="download" type="button" class="btn">Download PNG</button>
+<button id="reset" type="button" class="btn ghost">New image</button>
 </div>
 </section>
 </div>
 </div>
 </section>
-<section id="cara-kerja" class="section">
+<section id="quality" class="section" hidden>
 <div class="wrap">
-<h2>Cara kerja</h2>
-<p class="lead">Tiga langkah, tanpa akun.</p>
-<ol class="steps">
-<li><b>1</b><h3>Unggah gambar</h3><p>Pilih foto dari galeri, seret ke kotak unggah, atau tempel dari clipboard.</p></li>
-<li><b>2</b><h3>Latar dihapus otomatis</h3><p>Model AI berjalan di browser Anda dan memisahkan objek dari latarnya.</p></li>
-<li><b>3</b><h3>Unduh hasilnya</h3><p>Pilih latar transparan, putih, hitam, atau warna sendiri, lalu unduh sebagai PNG.</p></li>
-</ol>
+<h2>Stunning quality</h2>
+<p class="lead">See what the result looks like.</p>
+<div id="tabs" class="tabs"></div>
+<div class="pair">
+<figure><img id="gOrig" alt="Original"><figcaption>Original</figcaption></figure>
+<figure class="checker"><img id="gCut" alt="Transparent background"><figcaption>Transparent background</figcaption></figure>
+</div>
 </div>
 </section>
-<section id="fitur" class="section alt">
+<section class="section alt">
 <div class="wrap">
-<h2>Kenapa memakai alat ini</h2>
-<p class="lead">Dibuat sederhana, cepat, dan menghargai privasi.</p>
-<ul class="features">
-<li><h3>Privat</h3><p>Gambar tidak pernah meninggalkan perangkat Anda dan tidak disimpan di server.</p></li>
-<li><h3>Tanpa kuota</h3><p>Tanpa batas harian, tanpa watermark, dan tanpa perlu membuat akun.</p></li>
-<li><h3>Bisa offline</h3><p>Pasang sebagai aplikasi lalu pakai tanpa internet setelah dimuat pertama kali.</p></li>
-<li><h3>Pilihan latar</h3><p>Transparan, putih, hitam, atau warna bebas langsung dari halaman hasil.</p></li>
+<h2>A fast and private background remover</h2>
+<p class="prose">Cut out the subject of any photo with a lightweight AI model that runs right in your browser. There is no account to create, no watermark, and nothing is sent to a server.</p>
+</div>
+</section>
+<section class="section">
+<div class="wrap">
+<h2>One tool, many uses</h2>
+<p class="prose">Switch your photo to a white background for clean product shots and profile pictures, or keep it transparent and export a PNG for logos, stickers, game assets, and presentations.</p>
+<ul class="chips">
+<li>E-commerce</li>
+<li>Profile photos</li>
+<li>Logos</li>
+<li>Stickers</li>
+<li>Game assets</li>
+<li>Presentations</li>
 </ul>
 </div>
 </section>
-<section id="faq" class="section">
+<section id="how" class="section alt">
+<div class="wrap">
+<h2>How it works</h2>
+<p class="lead">Three steps, no account.</p>
+<ol class="steps">
+<li><b>1</b><h3>Upload your image</h3><p>Pick a photo from your gallery, drag it into the upload box, or paste it from your clipboard.</p></li>
+<li><b>2</b><h3>The background is removed</h3><p>An AI model runs in your browser and separates the subject from the background.</p></li>
+<li><b>3</b><h3>Download the result</h3><p>Choose a transparent, white, black, or custom color background and download it as a PNG.</p></li>
+</ol>
+</div>
+</section>
+<section id="features" class="section">
+<div class="wrap">
+<h2>Why use this tool</h2>
+<p class="lead">Simple, quick, and respectful of your privacy.</p>
+<ul class="features">
+<li><h3>Private</h3><p>Your images never leave your device and are never stored on a server.</p></li>
+<li><h3>No limits</h3><p>No daily quota, no watermark, and no account required.</p></li>
+<li><h3>Works offline</h3><p>Install it as an app and use it without internet after the first load.</p></li>
+<li><h3>Background options</h3><p>Transparent, white, black, or any color, right from the result screen.</p></li>
+</ul>
+</div>
+</section>
+<section id="faq" class="section alt">
 <div class="wrap faq">
-<h2>Pertanyaan umum</h2>
-<p class="lead">Hal yang paling sering ditanyakan.</p>
+<h2>Frequently asked questions</h2>
+<p class="lead">The things people ask most.</p>
 <details>
-<summary>Apakah benar-benar gratis?</summary>
-<p>Ya. Pemrosesan berjalan di perangkat Anda sehingga biaya server hampir nol. Jika alat ini membantu, Anda bisa mendukung lewat Trakteer.</p>
+<summary>Is it really free?</summary>
+<p>Yes. Processing runs on your device, so server costs are close to zero. If the tool helps you, you can support it on Trakteer.</p>
 </details>
 <details>
-<summary>Apakah gambar saya diunggah ke server?</summary>
-<p>Tidak. Seluruh proses terjadi di browser Anda. Anda bisa membuktikannya dengan memakai alat ini dalam mode pesawat setelah halaman dimuat.</p>
+<summary>Is my image uploaded to a server?</summary>
+<p>No. Everything happens in your browser. You can verify this by using the tool in airplane mode after the page has loaded.</p>
 </details>
 <details>
-<summary>Kenapa hasil kadang kurang rapi?</summary>
-<p>Alat ini memakai model ringan agar cepat di HP. Rambut sangat halus, objek tembus pandang, atau gambar dengan kontras rendah bisa kurang sempurna. Foto dengan objek yang jelas memberi hasil terbaik.</p>
+<summary>Why is the result sometimes imperfect?</summary>
+<p>The tool uses a lightweight model so it stays fast on phones. Very fine hair, see-through objects, or low-contrast images can come out less than perfect. Photos with a clear subject give the best results.</p>
 </details>
 <details>
-<summary>Format dan ukuran apa yang didukung?</summary>
-<p>JPG, PNG, dan WebP. Sisi terpanjang gambar dibatasi 2048 piksel agar proses tetap lancar, dan hasil diunduh sebagai PNG.</p>
+<summary>Which formats and sizes are supported?</summary>
+<p>JPG, PNG, and WebP. The longest side is limited to 2048 pixels to keep processing smooth, and results are downloaded as PNG.</p>
 </details>
 <details>
-<summary>Kenapa pemrosesan pertama lebih lama?</summary>
-<p>Model AI sekitar 4 MB diunduh sekali lalu disimpan di perangkat. Setelah itu proses jauh lebih cepat.</p>
+<summary>Why is the first run slower?</summary>
+<p>The AI model, about 4 MB, is downloaded once and stored on your device. After that, processing is much faster.</p>
 </details>
+</div>
+</section>
+<section class="section cta">
+<div class="wrap">
+<h2>Remove Image Background</h2>
+<p>Get a transparent background for any image.</p>
+<a class="btn big" href="#top">Upload Image</a>
 </div>
 </section>
 <section class="section">
 <div class="wrap">
 <div class="support">
-<h2>Suka dengan alat ini?</h2>
-<p>Layanan ini gratis dan dikembangkan secara mandiri. Dukungan Anda membantu biaya domain dan pengembangan fitur baru.</p>
-<a class="btn" href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Dukung lewat Trakteer</a>
+<h2>Enjoying this tool?</h2>
+<p>This tool is free and independently built. Your support helps cover the domain and the development of new features.</p>
+<a class="btn" href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Support on Trakteer</a>
 </div>
 </div>
 </section>
 </main>
 <footer class="foot">
-<div class="wrap foot-in">
-<span>Dibuat oleh RyHanC</span>
-<nav>
-<a href="https://ryhanc.wtf/" target="_blank" rel="noopener noreferrer">Portofolio</a>
-<a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub</a>
-<a href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Trakteer</a>
-</nav>
+<div class="wrap">
+<div class="foot-cols">
+<div>
+<h4>Product</h4>
+<ul>
+<li><a href="#how">How it works</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+</div>
+<div>
+<h4>Open source</h4>
+<ul>
+<li><a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub repository</a></li>
+<li><a href="https://github.com/RayHanC4-Lua/bgremover/issues" target="_blank" rel="noopener noreferrer">Report an issue</a></li>
+<li><a href="https://github.com/RayHanC4-Lua/bgremover/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a></li>
+</ul>
+</div>
+<div>
+<h4>Support</h4>
+<ul>
+<li><a href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Support on Trakteer</a></li>
+</ul>
+</div>
+<div>
+<h4>About</h4>
+<ul>
+<li><a href="https://ryhanc.wtf/" target="_blank" rel="noopener noreferrer">About me</a></li>
+</ul>
+</div>
+</div>
+<div class="foot-bottom">&copy; 2026 RyHanC. Open source under the MIT License.</div>
 </div>
 </footer>
 <script type="module" src="js/main.js"></script>
+<script type="module" src="js/gallery.js"></script>
 </body>
 </html>
