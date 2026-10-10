@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Penghapus Latar Gambar</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0f1115">
+<link rel="icon" href="assets/icons/icon-192.png">
+</head>
+<body>
+<main class="app">
+<header>
+<h1>Penghapus Latar</h1>
+<p>Gratis. Gambar diproses di perangkat Anda dan tidak diunggah ke server.</p>
+</header>
+<label id="drop" class="drop">
+<input id="file" type="file" accept="image/*" hidden>
+<span>Pilih atau seret gambar ke sini</span>
+</label>
+<div id="status" class="status" hidden>
+<div id="statusText"></div>
+<div id="bar" class="bar"><div id="barFill"></div></div>
+</div>
+<section id="result" hidden>
+<div class="stage"><canvas id="out"></canvas></div>
+<div id="swatches" class="swatches">
+<button type="button" data-bg="transparent" class="active" aria-label="Transparan"></button>
+<button type="button" data-bg="#ffffff" style="background:#ffffff" aria-label="Putih"></button>
+<button type="button" data-bg="#000000" style="background:#000000" aria-label="Hitam"></button>
+<input id="custom" type="color" value="#4f8cff" aria-label="Warna lain">
+</div>
+<div class="actions">
+<button id="download" type="button">Unduh PNG</button>
+<button id="reset" type="button" class="ghost">Gambar baru</button>
+</div>
+</section>
+</main>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
