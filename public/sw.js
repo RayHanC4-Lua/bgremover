@@ -1,4 +1,4 @@
-const CACHE = 'app-v4';
+const CACHE = 'app-v5';
 const ASSETS = [
   './',
   'index.html',
@@ -7,6 +7,7 @@ const ASSETS = [
   'js/main.js',
   'js/theme.js',
   'js/gallery.js',
+  'js/tools.js',
   'js/ui.js',
   'js/model.js',
   'js/worker.js',

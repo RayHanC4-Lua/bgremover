@@ -114,3 +114,18 @@ a{color:inherit}
 .pair{grid-template-columns:1fr 1fr}
 .foot-cols{grid-template-columns:repeat(4,1fr)}
 }
+.tool-tabs{display:flex;gap:8px;margin:16px 0 6px;overflow-x:auto;padding-bottom:2px}
+.tt{flex:0 0 auto;padding:9px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--text);font:inherit;font-size:.92rem;cursor:pointer}
+.tt.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.panel{padding:6px 0 4px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:10px 0}
+.grad{width:38px;height:38px;padding:0;border-radius:12px;border:2px solid var(--line);cursor:pointer}
+.grad.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.chipbtn{display:inline-flex;align-items:center;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font:inherit;font-size:.9rem;cursor:pointer}
+.chipbtn.active{border-color:var(--accent);color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.slide{display:flex;align-items:center;gap:12px;margin:12px 0;color:var(--muted);font-size:.9rem}
+.slide span{flex:0 0 76px}
+.slide input[type=range]{flex:1;accent-color:var(--accent)}
+.note{margin:8px 0 0;color:var(--muted);font-size:.85rem}
+.sel{padding:12px 10px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit}
+.stage canvas.brush{cursor:crosshair;touch-action:none}

@@ -1,6 +1,7 @@
 import { loadModel } from './model.js';
-import { bitmapFromFile, toInput, buildCutout, compose } from './image.js';
-import { els, setStatus, setProgress, setIndeterminate, hideStatus, showResult, showPicker, setActiveSwatch } from './ui.js';
+import { bitmapFromFile, toInput, buildCutout } from './image.js';
+import * as Tools from './tools.js';
+import { els, setStatus, setProgress, setIndeterminate, hideStatus, showResult, showPicker } from './ui.js';
 
 var worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
 
@@ -8,7 +9,6 @@ var ready = null;
 var pendng = null;
 var modelPromise = null;
 var cutout = null;
-var bg = 'transparent';
 var firstRun = true;
 var fileCount = 0;
 var lastResutl = null;
@@ -62,15 +62,6 @@ function infer(input) {
   return pendng.promise;
 }
 
-function render() {
-  compose(cutout, bg, els.out);
-}
-
-function oldReset() {
-  cutout = null;
-  bg = 'transparent';
-}
-
 async function handleFile(file) {
   if (!file || !file.type.startsWith('image/')) return;
   fileCount++;
@@ -84,8 +75,9 @@ async function handleFile(file) {
     var mask = await infer(toInput(bmp));
     cutout = buildCutout(bmp, mask);
     lastResutl = cutout;
+    Tools.reset();
+    Tools.setSource(bmp, cutout);
     bmp.close();
-    render();
     hideStatus();
     showResult();
     firstRun = false;
@@ -119,35 +111,9 @@ els.drop.addEventListener('drop', function (e) {
   handleFile(e.dataTransfer.files[0]);
 });
 
-els.swatches.addEventListener('click', function (e) {
-  var b = e.target.closest('button[data-bg]');
-  if (!b || !cutout) return;
-  bg = b.dataset.bg;
-  setActiveSwatch(b);
-  render();
-});
-
-els.custom.addEventListener("input", function () {
-  if (!cutout) return;
-  bg = els.custom.value;
-  setActiveSwatch(null);
-  render();
-});
-
-els.download.addEventListener('click', function () {
-  els.out.toBlob(function (blob) {
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'result-' + Date.now() + '.png';
-    a.click();
-    setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
-  }, 'image/png');
-});
-
 els.reset.addEventListener('click', function () {
   cutout = null;
-  bg = 'transparent';
-  setActiveSwatch(els.swatches.querySelector('button[data-bg="transparent"]'));
+  Tools.reset();
   showPicker();
 });
 
