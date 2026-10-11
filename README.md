@@ -80,10 +80,11 @@ Service worker memakai cache-first. Setelah mengubah file di public/, naikkan ni
 
 Kode proyek ini berlisensi MIT, lihat berkas LICENSE.
 
-- U2-Net oleh Xuebin Qin dan kawan-kawan, lisensi Apache 2.0
+- U2-Net oleh Xuebin Qin dan Friends, lisensi Apache 2.0
 - ONNX Runtime Web oleh Microsoft, lisensi MIT
 - Berkas model ONNX berasal dari rilis proyek rembg
-
+- MODNet oleh Zhanghan Ke dan kawan-kawan
+  
 Jika mengganti model, periksa lisensinya terlebih dahulu. Beberapa model populer (misalnya RMBG dari BRIA) tidak boleh dipakai untuk tujuan komersial.
 
 ## Dukungan
