@@ -55,6 +55,7 @@
 <span class="hint">or drag and drop an image here</span>
 <span class="hint">You can also paste an image from your clipboard</span>
 </label>
+<label id="hdRow" class="hdrow" hidden><input type="checkbox" id="hdMode"><span class="hdtitle">Portrait HD</span><span class="hint">Finer hair detail for photos of people. Slower, with a one-time 25 MB download.</span></label>
 <div id="samples" class="samples" hidden>
 <span class="hint">No image? Try one of these:</span>
 <div id="thumbs" class="thumbs"></div>
@@ -65,7 +66,7 @@
 <div id="bar" class="bar"><div id="barFill"></div></div>
 </div>
 <section id="result" hidden>
-<div class="stage"><canvas id="out"></canvas></div>
+<div class="stage"><div class="cmpbox"><canvas id="out"></canvas><div id="cmp" class="cmp" hidden><canvas id="cmpCanvas"></canvas><span class="cmp-tag l">Original</span><span class="cmp-tag r">Result</span><div class="cmp-handle"><span class="cmp-knob"></span></div></div><button type="button" id="cmpBtn" class="cmp-btn">Compare</button></div></div>
 <div id="toolTabs" class="tool-tabs">
 <button type="button" class="tt active" data-tool="bg">Background</button>
 <button type="button" class="tt" data-tool="brush">Brush</button>
@@ -210,7 +211,7 @@
 </details>
 <details>
 <summary>Why is the result sometimes imperfect?</summary>
-<p>The tool uses a lightweight model so it stays fast on phones. Very fine hair, see-through objects, or low-contrast images can come out less than perfect. Photos with a clear subject give the best results.</p>
+<p>The tool uses a lightweight model so it stays fast on phones. Very fine hair, see-through objects, or low-contrast images can come out less than perfect. Photos with a clear subject give the best results. For portraits, try Portrait HD for finer hair detail.</p>
 </details>
 <details>
 <summary>Which formats and sizes are supported?</summary>

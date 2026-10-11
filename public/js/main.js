@@ -1,6 +1,7 @@
 import { loadModel } from './model.js';
 import { bitmapFromFile, toInput, buildCutout } from './image.js';
 import * as Tools from './tools.js';
+import { runHD } from './hd.js';
 import { els, setStatus, setProgress, setIndeterminate, hideStatus, showResult, showPicker } from './ui.js';
 
 var worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
@@ -62,18 +63,42 @@ function infer(input) {
   return pendng.promise;
 }
 
+var hdBox = document.getElementById('hdMode');
+
+function hdStatus(t) {
+  setStatus(t);
+  if (t.indexOf('Downloading') === 0) {
+    setProgress(0);
+  } else {
+    setIndeterminate(true);
+  }
+}
+
 async function handleFile(file) {
   if (!file || !file.type.startsWith('image/')) return;
   fileCount++;
   if (firstRun) { console.log('first run'); }
+  var bmp = null;
   try {
     els.drop.hidden = true;
-    await ensureModel();
-    setStatus('Processing image...');
-    setIndeterminate(true);
-    var bmp = await bitmapFromFile(file);
-    var mask = await infer(toInput(bmp));
-    cutout = buildCutout(bmp, mask);
+    bmp = await bitmapFromFile(file);
+    var done = false;
+    if (hdBox && hdBox.checked) {
+      try {
+        cutout = await runHD(bmp, hdStatus, setProgress);
+        done = true;
+      } catch (err) {
+        console.log('hd failed', err);
+        setStatus('Portrait HD failed, switching to standard mode...');
+      }
+    }
+    if (!done) {
+      await ensureModel();
+      setStatus('Processing image...');
+      setIndeterminate(true);
+      var mask = await infer(toInput(bmp));
+      cutout = buildCutout(bmp, mask);
+    }
     lastResutl = cutout;
     Tools.reset();
     Tools.setSource(bmp, cutout);
@@ -82,6 +107,7 @@ async function handleFile(file) {
     showResult();
     firstRun = false;
   } catch (err) {
+    if (bmp) bmp.close();
     setIndeterminate(false);
     setStatus('Failed: ' + err.message);
     els.drop.hidden = false;
@@ -170,3 +196,15 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   });
 }
+
+
+(function () {
+  var row = document.getElementById('hdRow');
+  if (!row) return;
+  fetch('models/modnet.onnx', { method: 'HEAD' })
+    .then(function (r) {
+      var type = r.headers.get('content-type') || '';
+      if (r.ok && type.indexOf('text/html') === -1) row.hidden = false;
+    })
+    .catch(function () {});
+})();

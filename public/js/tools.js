@@ -199,6 +199,7 @@ function render() {
   c.width = o.width;
   c.height = o.height;
   c.getContext('2d').drawImage(o, 0, 0);
+  if (cmpOn) drawCmp();
 }
 
 function schedule() {
@@ -351,6 +352,55 @@ function download() {
   }, type, 0.92);
 }
 
+var cmpOn = false;
+var cmpPos = 50;
+var cmpDrag = false;
+var cmpAnim = 0;
+
+function setCmp(v) {
+  cmpPos = Math.max(0, Math.min(100, v));
+  els.cmp.style.setProperty('--cmp', cmpPos + '%');
+}
+
+function drawCmp() {
+  var c = els.cmpCanvas;
+  c.width = els.out.width;
+  c.height = els.out.height;
+  drawCover(c.getContext('2d'), orig, c.width, c.height, 1);
+}
+
+function sweepCmp() {
+  cancelAnimationFrame(cmpAnim);
+  var t0 = performance.now();
+  setCmp(94);
+  function step(now) {
+    var k = Math.min(1, (now - t0) / 650);
+    var e = 1 - Math.pow(1 - k, 3);
+    setCmp(94 + (50 - 94) * e);
+    if (k < 1 && cmpOn) cmpAnim = requestAnimationFrame(step);
+  }
+  cmpAnim = requestAnimationFrame(step);
+}
+
+function setCompare(on) {
+  cmpOn = on;
+  els.cmp.hidden = !on;
+  els.cmpBtn.textContent = on ? 'Hide compare' : 'Compare';
+  if (!on) {
+    cancelAnimationFrame(cmpAnim);
+    return;
+  }
+  if (s.preset !== 'original') setPreset('original');
+  render();
+  drawCmp();
+  sweepCmp();
+}
+
+function cmpMove(e) {
+  var r = els.cmp.getBoundingClientRect();
+  setCmp(((e.clientX - r.left) / r.width) * 100);
+}
+
 function resetUI() {
   s.bg = 'transparent';
   s.preset = 'original';
@@ -365,13 +415,14 @@ function resetUI() {
   els.outColor.value = '#ffffff';
   els.bSize.value = 40;
   els.fmt.value = 'png';
+  setCompare(false);
   markBg(els.swatches.querySelector('button[data-bg="transparent"]'));
   setTool('bg');
   setPreset('original');
 }
 
 function init() {
-  ['out', 'swatches', 'custom', 'grads', 'bgFile', 'blurBg', 'toolTabs', 'bEraser', 'bRestore', 'bUndo', 'bSize', 'presets', 'pad', 'shadow', 'outline', 'outColor', 'fmt', 'download'].forEach(function (id) {
+  ['out', 'swatches', 'custom', 'grads', 'bgFile', 'blurBg', 'toolTabs', 'bEraser', 'bRestore', 'bUndo', 'bSize', 'presets', 'pad', 'shadow', 'outline', 'outColor', 'fmt', 'download', 'cmp', 'cmpCanvas', 'cmpBtn'].forEach(function (id) {
     els[id] = $(id);
   });
 
@@ -456,6 +507,25 @@ function init() {
   els.out.addEventListener('pointermove', onMove);
   els.out.addEventListener('pointerup', onUp);
   els.out.addEventListener('pointercancel', onUp);
+
+  els.cmpBtn.addEventListener('click', function () {
+    if (!cut) return;
+    setCompare(!cmpOn);
+  });
+
+  els.cmp.addEventListener('pointerdown', function (e) {
+    cmpDrag = true;
+    cancelAnimationFrame(cmpAnim);
+    try { els.cmp.setPointerCapture(e.pointerId); } catch (err) {}
+    cmpMove(e);
+  });
+
+  els.cmp.addEventListener('pointermove', function (e) {
+    if (cmpDrag) cmpMove(e);
+  });
+
+  els.cmp.addEventListener('pointerup', function () { cmpDrag = false; });
+  els.cmp.addEventListener('pointercancel', function () { cmpDrag = false; });
 
   els.download.addEventListener('click', download);
 }

@@ -1,4 +1,4 @@
-const CACHE = 'app-v5';
+const CACHE = 'app-v6';
 const ASSETS = [
   './',
   'index.html',
@@ -8,6 +8,8 @@ const ASSETS = [
   'js/theme.js',
   'js/gallery.js',
   'js/tools.js',
+  'js/hd.js',
+  'js/hd-worker.js',
   'js/ui.js',
   'js/model.js',
   'js/worker.js',
@@ -38,7 +40,7 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin || req.url.indexOf('modnet') !== -1) return;
   e.respondWith(
     caches.match(req).then((hit) => {
       if (hit) return hit;
