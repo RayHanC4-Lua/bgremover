@@ -1,4 +1,4 @@
-const CACHE = 'app-v6';
+const CACHE = 'app-v7';
 const ASSETS = [
   './',
   'index.html',
@@ -40,7 +40,7 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const req = e.request;
-  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin || req.url.indexOf('modnet') !== -1) return;
+  if (req.method !== 'GET' || new URL(req.url).origin !== location.origin || req.url.indexOf('modnet') !== -1 || req.url.indexOf('ads-config') !== -1) return;
   e.respondWith(
     caches.match(req).then((hit) => {
       if (hit) return hit;

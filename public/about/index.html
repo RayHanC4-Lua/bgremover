@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About BG Remover</title>
+<meta name="description" content="About BG Remover, a free background remover that runs in your browser, with credits and open source details.">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="https://removebg.sbs/about/">
+<link rel="icon" href="/assets/icons/icon-192.png">
+<script src="/js/theme.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="topbar">
+<div class="wrap topbar-in">
+<a class="brand" href="/">
+<svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8"/><circle cx="16" cy="13" r="5"/><path d="M7 26c0-5 4-8 9-8s9 3 9 8z"/></svg>
+<span>BG Remover</span>
+</a>
+<nav class="nav">
+<a href="/#how">How it works</a>
+<a href="/#features">Features</a>
+<a href="/#faq">FAQ</a>
+<a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub</a>
+</nav>
+<div class="tools">
+<button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle theme">
+<svg class="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+<svg class="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<a class="btn small" href="https://trakteer.id/areeyhanc/tip?open=true" target="_blank" rel="noopener noreferrer">Support</a>
+</div>
+</div>
+</header>
+<main>
+<article class="doc">
+<h1>About BG Remover</h1>
+<p class="meta">A free background remover that runs in your browser.</p>
+<p>BG Remover removes the background from photos without sending them anywhere. You open the page, choose an image, and the cutout is made on your own device.</p>
+<h2>How it works</h2>
+<p>A small AI model runs inside your browser using ONNX Runtime Web. The standard model is lightweight so it stays quick on phones. For photos of people there is an optional Portrait HD mode that uses a larger model for finer hair detail. After the first visit the models are cached, so the tool also works offline once installed as an app.</p>
+<h2>What you can do</h2>
+<ul>
+<li>Remove a background and download a transparent PNG, or export JPG and WebP.</li>
+<li>Replace the background with a color, gradient, blurred copy, or your own image.</li>
+<li>Fix details with an erase and restore brush, and compare with the original.</li>
+<li>Resize for square, portrait, story, wide, and ID photo formats.</li>
+<li>Add a soft shadow or a sticker-style outline.</li>
+</ul>
+<h2>Open source and credits</h2>
+<p>The code is open source under the MIT License on <a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub</a>. It builds on U2-Net (Apache License 2.0), MODNet (Apache License 2.0) with an ONNX export from the Xenova/modnet repository on Hugging Face, and ONNX Runtime Web (MIT License).</p>
+<h2>Who makes it</h2>
+<p>BG Remover is built and maintained by RyHanC, an independent web developer from Indonesia. You can learn more at <a href="https://ryhanc.wtf/" target="_blank" rel="noopener noreferrer">ryhanc.wtf</a>. The tool is free and is supported by voluntary donations on Trakteer and by ads.</p>
+<p class="notice">Independent project. BG Remover is not affiliated with, endorsed by, or sponsored by remove.bg or Canva.</p>
+</article>
+</main>
+<footer class="foot">
+<div class="wrap">
+<nav class="foot-links">
+<a href="/">Home</a>
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/contact/">Contact</a>
+<a href="https://github.com/RayHanC4-Lua/bgremover" target="_blank" rel="noopener noreferrer">GitHub</a>
+</nav>
+<div class="foot-bottom">&copy; 2026 RyHanC. Open source under the MIT License.<br>BG Remover is an independent project. It is not affiliated with, endorsed by, or sponsored by remove.bg or Canva.</div>
+</div>
+</footer>
+</body>
+</html>
