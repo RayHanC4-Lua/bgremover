@@ -2,7 +2,7 @@
 
 Penghapus latar gambar gratis yang berjalan 100% di browser. Gambar tidak diunggah ke server mana pun.
 
-Demo: https://bgremover.areeeeyysu.workers.dev
+Demo: https://removebg.sbs
 
 ## Fitur
 
