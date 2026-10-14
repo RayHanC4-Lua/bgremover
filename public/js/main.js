@@ -2,6 +2,7 @@ import { loadModel } from './model.js';
 import { bitmapFromFile, toInput, buildCutout } from './image.js';
 import * as Tools from './tools.js';
 import { runHD } from './hd.js';
+import { refineCutout } from './refine.js';
 import { els, setStatus, setProgress, setIndeterminate, hideStatus, showResult, showPicker } from './ui.js';
 
 var worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
@@ -98,6 +99,13 @@ async function handleFile(file) {
       setIndeterminate(true);
       var mask = await infer(toInput(bmp));
       cutout = buildCutout(bmp, mask);
+      try {
+        setStatus('Refining edges...');
+        await new Promise(function (r) { setTimeout(r, 30); });
+        cutout = refineCutout(bmp, cutout);
+      } catch (err) {
+        console.log('refine failed', err);
+      }
     }
     lastResutl = cutout;
     Tools.reset();

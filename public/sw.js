@@ -1,4 +1,4 @@
-const CACHE = 'app-v10';
+const CACHE = 'app-v11';
 const ASSETS = [
   './',
   'index.html',
@@ -10,6 +10,7 @@ const ASSETS = [
   'js/tools.js',
   'js/hd.js',
   'js/hd-worker.js',
+  'js/refine.js',
   'js/ui.js',
   'js/model.js',
   'js/worker.js',
