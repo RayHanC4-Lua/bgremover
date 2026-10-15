@@ -6,3 +6,11 @@
 
 /vendor/*
   Cache-Control: public, max-age=31536000, immutable
+
+/.well-known/assetlinks.json
+  Content-Type: application/json
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=3600
+
+/manifest.webmanifest
+  Content-Type: application/manifest+json

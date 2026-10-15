@@ -22,6 +22,14 @@
 
   apply(stored() || system());
 
+  var app = document.referrer.indexOf('android-app://') === 0;
+  try {
+    if (/[?&]source=twa(&|$)/.test(location.search)) sessionStorage.setItem('twa', '1');
+    if (sessionStorage.getItem('twa') === '1') app = true;
+    if (app) sessionStorage.setItem('twa', '1');
+  } catch (e) {}
+  if (app) root.classList.add('twa');
+
   document.addEventListener('DOMContentLoaded', function () {
     var b = document.getElementById('themeToggle');
     if (!b) return;

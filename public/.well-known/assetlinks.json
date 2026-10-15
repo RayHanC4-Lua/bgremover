@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "sbs.removebg.app",
+      "sha256_cert_fingerprints": [
+        "7C:20:82:EC:68:65:3E:A0:4D:AC:DB:F3:CF:16:77:6D:99:DC:6E:F7:47:51:3E:98:28:DE:78:01:2D:C4:D3:4F"
+      ]
+    }
+  }
+]

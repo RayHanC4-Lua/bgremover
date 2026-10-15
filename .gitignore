@@ -7,3 +7,10 @@ node_modules/
 tmp-ort/
 .DS_Store
 Thumbs.db
+*.keystore
+*.jks
+keystore.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties

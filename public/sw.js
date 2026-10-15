@@ -1,4 +1,4 @@
-const CACHE = 'app-v11';
+const CACHE = 'app-v12';
 const ASSETS = [
   './',
   'index.html',
@@ -20,7 +20,9 @@ const ASSETS = [
   'vendor/ort/ort-wasm-simd-threaded.wasm',
   'models/u2netp.onnx',
   'assets/icons/icon-192.png',
-  'assets/icons/icon-512.png'
+  'assets/icons/icon-512.png',
+  'assets/icons/maskable-192.png',
+  'assets/icons/maskable-512.png'
 ];
 
 self.addEventListener('install', (e) => {
@@ -51,6 +53,9 @@ self.addEventListener('fetch', (e) => {
           caches.open(CACHE).then((c) => c.put(req, copy));
         }
         return res;
+      }).catch(() => {
+        if (req.mode === 'navigate') return caches.match('index.html');
+        return new Response('', { status: 503, statusText: 'Offline' });
       });
     })
   );
