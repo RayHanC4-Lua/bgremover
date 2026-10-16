@@ -1,0 +1,24 @@
+name: Feature request / Usulan fitur
+description: Suggest an idea / Usulkan ide baru
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does it solve? / Masalah apa yang ingin diselesaikan?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea / Ide kamu
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where? / Untuk bagian mana?
+      options:
+        - Website
+        - Android app / Aplikasi Android
+        - Both / Keduanya

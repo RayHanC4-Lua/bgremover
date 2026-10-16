@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security issue / Masalah keamanan
+    url: https://github.com/RayHanC4-Lua/bgremover/blob/main/SECURITY.md
+    about: Please report privately / Mohon laporkan secara pribadi
+  - name: Become a tester / Jadi tester
+    url: https://removebg.sbs/testers
+    about: Help test the Android app / Bantu uji aplikasi Android

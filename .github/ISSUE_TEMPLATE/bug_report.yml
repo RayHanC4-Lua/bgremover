@@ -1,0 +1,46 @@
+name: Bug report / Laporan bug
+description: Something is not working / Ada yang tidak berjalan semestinya
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting. Please do not attach private photos.
+        Terima kasih sudah melapor. Mohon jangan lampirkan foto pribadi.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where did it happen? / Di mana terjadinya?
+      options:
+        - Website (removebg.sbs)
+        - Android app / Aplikasi Android
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and browser / Perangkat dan browser
+      placeholder: Samsung A52, Chrome 141
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce / Langkah memunculkan bug
+      placeholder: |
+        1. Open the app
+        2. Pick a photo
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect and what happened? / Apa yang diharapkan dan apa yang terjadi?
+    validations:
+      required: true
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / Screenshot
+      description: Optional / Opsional

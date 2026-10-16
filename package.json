@@ -1,11 +1,17 @@
 {
   "name": "bgremover",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
-  "description": "Penghapus latar gambar gratis yang berjalan di browser",
+  "description": "Free, private background remover that runs entirely on your device",
   "scripts": {
     "dev": "python -m http.server 8080 -d public",
     "deploy": "npx wrangler deploy"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "homepage": "https://removebg.sbs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RayHanC4-Lua/bgremover.git"
+  },
+  "author": "RyHanC (https://ryhanc.wtf)"
 }
