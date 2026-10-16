@@ -56,9 +56,6 @@ jobs:
           KEY_ALIAS: upload
         run: gradle --no-daemon bundleRelease assembleRelease
 
-      - name: Show signing fingerprint
-        run: keytool -printcert -jarfile app/build/outputs/apk/release/app-release.apk | grep SHA256
-
       - uses: actions/upload-artifact@v4
         with:
           name: bgremover-${{ env.VERSION_NAME }}-${{ env.VERSION_CODE }}
