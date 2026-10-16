@@ -21,6 +21,30 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+<div id="splash" class="splash" aria-hidden="true">
+<div class="splash-mid">
+<svg class="splash-logo" viewBox="0 0 120 120">
+<defs>
+<pattern id="spChk" width="12.67" height="12.67" patternUnits="userSpaceOnUse"><rect width="12.67" height="12.67" fill="#ffffff"/><rect width="6.33" height="6.33" fill="#d6e0f5"/><rect x="6.33" y="6.33" width="6.33" height="6.33" fill="#d6e0f5"/></pattern>
+<clipPath id="spClip"><rect x="22" y="22" width="76" height="76" rx="14"/></clipPath>
+</defs>
+<rect width="120" height="120" rx="28" fill="#2f6bff"/>
+<g clip-path="url(#spClip)">
+<rect x="22" y="22" width="76" height="76" fill="url(#spChk)"/>
+<rect class="splash-photo" x="22" y="22" width="76" height="76" fill="#ffb86b"/>
+<circle cx="60" cy="51" r="13" fill="#2f6bff"/>
+<ellipse cx="60" cy="96" rx="25" ry="24" fill="#2f6bff"/>
+</g>
+<rect class="splash-scan" x="18" y="20" width="84" height="3" rx="1.5" fill="#ffffff"/>
+</svg>
+<div class="splash-name">BG Remover</div>
+<div class="splash-tag">Remove backgrounds on your device</div>
+</div>
+<div class="splash-foot">
+<div class="splash-bar"><div id="splashFill"></div></div>
+<div id="splashText" class="splash-text">Starting...</div>
+</div>
+</div>
 <header class="topbar">
 <div class="wrap topbar-in">
 <a class="brand" href="./">
@@ -59,9 +83,10 @@
 <label id="drop" class="drop">
 <input id="file" type="file" accept="image/*" hidden>
 <svg class="up" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
-<span class="btn big">Upload Image</span>
-<span class="hint">or drag and drop an image here</span>
-<span class="hint">You can also paste an image from your clipboard</span>
+<span class="btn big"><span class="web-only">Upload Image</span><span class="app-hint">Choose Photo</span></span>
+<span class="hint web-only">or drag and drop an image here</span>
+<span class="hint web-only">You can also paste an image from your clipboard</span>
+<span class="hint app-hint">Pick a photo from your gallery or camera</span>
 </label>
 <label id="hdRow" class="hdrow" hidden><input type="checkbox" id="hdMode"><span class="hdtitle">Portrait HD</span><span class="hint">Finer hair detail for photos of people. Slower, with a one-time 25 MB download.</span></label>
 <div id="samples" class="samples" hidden>
@@ -249,6 +274,16 @@
 </div>
 </div>
 </section>
+<section class="app-only">
+<div class="wrap">
+<nav class="app-links">
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/contact/">Contact</a>
+</nav>
+<p class="app-ver">BG Remover by RyHanC</p>
+</div>
+</section>
 </main>
 <footer class="foot">
 <div class="wrap">
@@ -289,6 +324,7 @@
 <div class="foot-bottom">&copy; 2026 RyHanC. Open source under the MIT License.<br>BG Remover is an independent project. It is not affiliated with, endorsed by, or sponsored by remove.bg or Canva.</div>
 </div>
 </footer>
+<script src="js/splash.js"></script>
 <script type="module" src="js/main.js"></script>
 <script type="module" src="js/gallery.js"></script>
 <script src="js/ads-config.js"></script>

@@ -1,10 +1,11 @@
-const CACHE = 'app-v12';
+const CACHE = 'app-v13';
 const ASSETS = [
   './',
   'index.html',
   'manifest.webmanifest',
   'css/style.css',
   'js/main.js',
+  'js/splash.js',
   'js/theme.js',
   'js/gallery.js',
   'js/tools.js',

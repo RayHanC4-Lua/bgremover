@@ -45,7 +45,10 @@ function ensureModel() {
   modelPromise = (async function () {
     setStatus('Downloading model (one time only)...');
     setProgress(0);
-    var buf = await loadModel('models/u2netp.onnx', setProgress);
+    var buf = await loadModel('models/u2netp.onnx', function (p) {
+      setProgress(p);
+      window.dispatchEvent(new CustomEvent('model-progress', { detail: p }));
+    });
     setStatus('Preparing model...');
     setIndeterminate(true);
     ready = defer();
@@ -216,3 +219,12 @@ if ('serviceWorker' in navigator) {
     })
     .catch(function () {});
 })();
+
+if (document.documentElement.classList.contains('twa')) {
+  ensureModel()
+    .catch(function (err) { console.log('warmup failed', err); })
+    .then(function () {
+      hideStatus();
+      window.dispatchEvent(new Event('app-ready'));
+    });
+}

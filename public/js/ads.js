@@ -1,6 +1,7 @@
 (function () {
   var cfg = window.ADS_CONFIG || {};
   var secs = document.querySelectorAll('.ad-sec');
+  if (document.documentElement.classList.contains('twa')) return;
   if (!cfg.client || !secs.length) return;
 
   function start() {
