@@ -344,9 +344,19 @@ function download() {
   o.toBlob(function (blob) {
     if (!blob) return;
     var ext = blob.type === 'image/jpeg' ? 'jpg' : blob.type === 'image/webp' ? 'webp' : 'png';
+    var name = 'bg-remover-' + Date.now() + '.' + ext;
+    if (window.AndroidApp && window.AndroidApp.saveImage) {
+      var fr = new FileReader();
+      fr.onload = function () {
+        var str = String(fr.result);
+        window.AndroidApp.saveImage(str.slice(str.indexOf(',') + 1), blob.type, name);
+      };
+      fr.readAsDataURL(blob);
+      return;
+    }
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'result-' + Date.now() + '.' + ext;
+    a.download = name;
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
   }, type, 0.92);

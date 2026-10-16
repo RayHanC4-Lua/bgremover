@@ -3,6 +3,7 @@ import { bitmapFromFile, toInput, buildCutout } from './image.js';
 import * as Tools from './tools.js';
 import { runHD } from './hd.js';
 import { refineCutout } from './refine.js';
+import * as Proc from './proc.js';
 import { els, setStatus, setProgress, setIndeterminate, hideStatus, showResult, showPicker } from './ui.js';
 
 var worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
@@ -86,6 +87,8 @@ async function handleFile(file) {
   try {
     els.drop.hidden = true;
     bmp = await bitmapFromFile(file);
+    hideStatus();
+    Proc.start(bmp);
     var done = false;
     if (hdBox && hdBox.checked) {
       try {
@@ -98,7 +101,7 @@ async function handleFile(file) {
     }
     if (!done) {
       await ensureModel();
-      setStatus('Processing image...');
+      setStatus('Removing background...');
       setIndeterminate(true);
       var mask = await infer(toInput(bmp));
       cutout = buildCutout(bmp, mask);
@@ -110,6 +113,9 @@ async function handleFile(file) {
         console.log('refine failed', err);
       }
     }
+    setStatus('Almost done...');
+    await Proc.reveal(cutout);
+    Proc.stop();
     lastResutl = cutout;
     Tools.reset();
     Tools.setSource(bmp, cutout);
@@ -118,6 +124,7 @@ async function handleFile(file) {
     showResult();
     firstRun = false;
   } catch (err) {
+    Proc.stop();
     if (bmp) bmp.close();
     setIndeterminate(false);
     setStatus('Failed: ' + err.message);

@@ -2,40 +2,16 @@ plugins {
     id 'com.android.application'
 }
 
-def appId = 'sbs.removebg.app'
-def host = 'removebg.sbs'
-def launchPath = '/?source=twa'
-
 android {
-    namespace appId
+    namespace 'sbs.removebg.app'
     compileSdk 36
 
     defaultConfig {
-        applicationId appId
+        applicationId 'sbs.removebg.app'
         minSdk 24
         targetSdk 36
         versionCode((System.getenv('VERSION_CODE') ?: '1').toInteger())
         versionName(System.getenv('VERSION_NAME') ?: '1.0.0')
-
-        resValue 'string', 'appName', 'BG Remover'
-        resValue 'string', 'launcherName', 'BG Remover'
-        resValue 'string', 'hostName', host
-        resValue 'string', 'launchUrl', 'https://' + host + launchPath
-        resValue 'string', 'webManifestUrl', 'https://' + host + '/manifest.webmanifest'
-        resValue 'string', 'providerAuthority', appId + '.fileprovider'
-        resValue 'string', 'fallbackType', 'customtabs'
-        resValue 'string', 'orientation', 'portrait'
-        resValue 'string', 'generatorApp', 'bubblewrap-cli'
-        resValue 'color', 'colorPrimary', '#FFFFFF'
-        resValue 'color', 'colorPrimaryDark', '#0F1115'
-        resValue 'color', 'navigationColor', '#FFFFFF'
-        resValue 'color', 'navigationColorDark', '#0F1115'
-        resValue 'color', 'navigationDividerColor', '#00000000'
-        resValue 'color', 'navigationDividerColorDark', '#00000000'
-        resValue 'color', 'backgroundColor', '#FFFFFF'
-        resValue 'integer', 'splashScreenFadeOutDuration', '300'
-        resValue 'bool', 'enableNotification', 'false'
-        resValue 'bool', 'enableSiteSettingsShortcut', 'true'
     }
 
     signingConfigs {
@@ -52,6 +28,7 @@ android {
     buildTypes {
         release {
             minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             if (System.getenv('KEYSTORE_FILE')) {
                 signingConfig signingConfigs.release
             }
@@ -66,8 +43,4 @@ android {
     lint {
         checkReleaseBuilds false
     }
-}
-
-dependencies {
-    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.4'
 }

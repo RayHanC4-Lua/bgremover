@@ -18,13 +18,16 @@
     root.setAttribute('data-theme', t);
     var m = document.querySelector('meta[name="theme-color"]');
     if (m) m.setAttribute('content', t === 'dark' ? '#0f1115' : '#ffffff');
+    try {
+      if (window.AndroidApp && window.AndroidApp.setTheme) window.AndroidApp.setTheme(t);
+    } catch (e) {}
   }
 
   apply(stored() || system());
 
-  var app = document.referrer.indexOf('android-app://') === 0;
+  var app = !!window.AndroidApp || document.referrer.indexOf('android-app://') === 0;
   try {
-    if (/[?&]source=twa(&|$)/.test(location.search)) sessionStorage.setItem('twa', '1');
+    if (/[?&]source=(twa|app)(&|$)/.test(location.search)) sessionStorage.setItem('twa', '1');
     if (sessionStorage.getItem('twa') === '1') app = true;
     if (app) sessionStorage.setItem('twa', '1');
   } catch (e) {}

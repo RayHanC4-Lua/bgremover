@@ -1,3 +1,5 @@
+import * as Proc from './proc.js';
+
 var $ = function (id) { return document.getElementById(id) };
 
 export var els = {
@@ -13,6 +15,11 @@ var lastStatus = '';
 var tmpCounter = 0;
 
 export function setStatus(text){
+  if (Proc.isActive()) {
+    Proc.setText(text);
+    lastStatus = text;
+    return;
+  }
   els.status.hidden = false;
   els.statusText.textContent = text;
   lastStatus = text;
@@ -20,11 +27,13 @@ export function setStatus(text){
 }
 
 export function setProgress(p) {
+  if (Proc.isActive()) Proc.setProgress(p);
   els.bar.classList.remove('indeterminate');
   els.barFill.style.width = Math.round(p*100) + '%';
 }
 
 export function setIndeterminate(on){
+    if (Proc.isActive()) Proc.setIndeterminate(on);
     els.bar.classList.toggle('indeterminate', on);
 }
 

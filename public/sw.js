@@ -1,4 +1,4 @@
-const CACHE = 'app-v13';
+const CACHE = 'app-v14';
 const ASSETS = [
   './',
   'index.html',
@@ -6,6 +6,7 @@ const ASSETS = [
   'css/style.css',
   'js/main.js',
   'js/splash.js',
+  'js/proc.js',
   'js/theme.js',
   'js/gallery.js',
   'js/tools.js',
