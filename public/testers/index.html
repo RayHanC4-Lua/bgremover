@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Halaman pendaftaran tester BG Remover -->
+<!-- Form dilindungi Cloudflare Turnstile dan dikirim ke /api/testers -->
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -13,6 +15,7 @@
 <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+<!-- Menu atas -->
 <header class="topbar">
 <div class="wrap topbar-in">
 <a class="brand" href="/">
@@ -37,16 +40,19 @@
 <main>
 <article class="doc">
 <div class="wrap tst">
+<!-- Judul dan penjelasan -->
 <div class="tst-head">
 <span class="tst-badge">Closed test on Google Play</span>
 <h1>Become a BG Remover tester</h1>
 <p class="tst-lead">Help me publish BG Remover on Google Play. Google requires 12 people to test a new app for 14 days before it can go public. It only takes a minute.</p>
 </div>
+<!-- Langkah menjadi tester -->
 <ol class="tst-steps">
 <li><b>1</b><div><h3>Sign up below</h3><p>Use the Google account email that is signed in to Play Store on your phone.</p></div></li>
 <li><b>2</b><div><h3>Join the test</h3><p>Once you are added, open the test link and tap <i>Become a tester</i>.</p></div></li>
 <li><b>3</b><div><h3>Keep it for 14 days</h3><p>Install the app from Google Play and keep it installed. Using it now and then is a bonus.</p></div></li>
 </ol>
+<!-- Form pendaftaran -->
 <form id="tstForm" class="tst-card" novalidate>
 <label class="tst-field">
 <span>Google account email</span>
@@ -64,10 +70,13 @@
 <input id="tstAgree" type="checkbox" required>
 <span>I will install the app from Google Play and keep it installed for 14 days.</span>
 </label>
+<!-- Kotak Turnstile -->
+<div id="tstCaptcha" class="tst-captcha" style="min-height:65px;margin:4px 0 2px"></div>
 <button id="tstBtn" class="btn big tst-btn" type="submit">Sign me up</button>
 <p id="tstMsg" class="tst-msg" role="status" aria-live="polite"></p>
 <p class="tst-fine">Your email is only used to add you to the test on Google Play and is deleted after the app is public. See the <a href="/privacy/">Privacy Policy</a>.</p>
 </form>
+<!-- Tampilan setelah berhasil daftar -->
 <div id="tstDone" class="tst-card tst-done" hidden>
 <div class="tst-ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
 <h2>You are on the list</h2>
@@ -78,6 +87,7 @@
 </div>
 </article>
 </main>
+<!-- Footer -->
 <footer class="foot">
 <div class="wrap">
 <nav class="foot-links">
@@ -90,7 +100,9 @@
 <div class="foot-bottom">&copy; 2026 RyHanC. Open source under the MIT License.<br>BG Remover is an independent project. It is not affiliated with, endorsed by, or sponsored by remove.bg or Canva.</div>
 </div>
 </footer>
-<script src="/js/testers-config.js"></script>
+<!-- Script form dan Turnstile -->
+<script src="/js/turnstile-config.js"></script>
 <script src="/js/testers.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=onTstTurnstile" async defer></script>
 </body>
 </html>

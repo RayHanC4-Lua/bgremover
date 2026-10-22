@@ -60,7 +60,7 @@
 | Hosting | Cloudflare Workers static assets, auto-deployed on push |
 | Android app | Native Java WebView shell, Android 7.0 (API 24) and up, target API 36 |
 | Android CI | GitHub Actions builds a signed AAB and APK |
-| Tester sign-up | Supabase (insert-only table with row level security) |
+| Tester sign-up | Cloudflare Worker with Turnstile, stored in Supabase |
 
 ## Project structure
 
@@ -77,7 +77,9 @@ bgremover/
     manifest.webmanifest
   android/                Android app (WebView shell)
   store/                  Google Play icon, feature graphic, screenshots
+  src/worker.js           API for tester sign-ups (Turnstile check)
   supabase/testers.sql    Table for tester sign-ups
+  supabase/testers_lock.sql  Lets only the Worker add testers
   .github/workflows/      Android build pipeline
   wrangler.jsonc          Cloudflare config
 ```

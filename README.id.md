@@ -60,7 +60,7 @@
 | Hosting | Cloudflare Workers static assets, deploy otomatis setiap push |
 | Aplikasi Android | WebView native berbasis Java, Android 7.0 (API 24) ke atas, target API 36 |
 | CI Android | GitHub Actions membuat AAB dan APK yang sudah ditandatangani |
-| Pendaftaran tester | Supabase (tabel khusus insert dengan row level security) |
+| Pendaftaran tester | Cloudflare Worker dengan Turnstile, disimpan di Supabase |
 
 ## Struktur proyek
 
@@ -77,7 +77,9 @@ bgremover/
     manifest.webmanifest
   android/                Aplikasi Android (WebView)
   store/                  Ikon, feature graphic, dan screenshot Google Play
+  src/worker.js           API pendaftaran tester (cek Turnstile)
   supabase/testers.sql    Tabel pendaftaran tester
+  supabase/testers_lock.sql  Hanya Worker yang bisa menambah tester
   .github/workflows/      Pipeline build Android
   wrangler.jsonc          Konfigurasi Cloudflare
 ```

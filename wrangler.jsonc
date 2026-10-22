@@ -1,7 +1,21 @@
+// Konfigurasi Cloudflare Workers untuk removebg.sbs
+// File statis diambil dari folder public, API tester ditangani src/worker.js
+// TURNSTILE_SECRET dan SUPABASE_SERVICE_KEY diisi sebagai Secret di dashboard, bukan di sini
 {
   "name": "bgremover",
   "compatibility_date": "2026-10-01",
+
+  // Kode Worker untuk /api/testers
+  "main": "src/worker.js",
+
+  // Folder website
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  // Nilai publik, aman ditaruh di repo
+  "vars": {
+    "SUPABASE_URL": "https://zppxesadekyhlliwrcwt.supabase.co"
   }
 }

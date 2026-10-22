@@ -17,3 +17,5 @@ android/local.properties
 *.b64.txt
 testers*.csv
 testers*.txt
+
+docs/PLAYSTORE.md
